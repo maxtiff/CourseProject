@@ -20,12 +20,11 @@ download <- function(url, dataFilename, zipFilename) {
   }
   
   if(!file.exists(zipPath)){ 
-    download.file(fileUrl, zipPath, mode="wb")
+    download.file(url, zipPath, mode="wb")
   }
   
   if(!file.exists(datasetDirPath)) { 
     unzip(zipPath, exdir=dataDirPath)
-    unlink(zipPath)
   }
   
   return(datasetDirPath)
@@ -40,6 +39,8 @@ zipFilename <- "UCI HAR Dataset.zip"
 ## Download file and return dir that contains the data.
 mainDir <- download(url, dataFilename, zipFilename)
 
-list.dirs(mainDir)
+scan
+
+list.dirs()
 
 
