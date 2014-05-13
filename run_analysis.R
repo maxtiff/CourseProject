@@ -1,24 +1,10 @@
+## Source data.table library to efficiently process large data sets 
 library(data.table)
 
-####  Function that downloads file from specified url and unzips into a destination directory.
-####  Function will not run if a directory exists.
-
-# download <- function(url, destination) {
-#   
-#   ## Check if dir for data exists. Create dir if not.
-#   if (!file.exists("data.zip")) {
-#     dir <- "./data"
-#     dir.create("data")
-#     
-#     ## Download file
-#     fileUrl <- url
-#     download.file(fileUrl,destination)
-#     
-#     ## Unzip file
-#     unzip(destination, exdir="./data")
-#   }
-#   
-# }
+#### Function organizes all files and then merges the test and train data sets together. Necessary files
+merge <- function(mainDir, testDir, trainDir) {
+  
+}
 
 ## Setting up data variables
 fileUrl <- "https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip"
@@ -39,6 +25,8 @@ if(!file.exists(zipPath)){
 
 if(!file.exists(datasetDirPath)) { 
   unzip(zipPath, exdir=dataDirPath)
+  unlink(zipPath)
 }
 
-# download("https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip","data.zip")
+
+
