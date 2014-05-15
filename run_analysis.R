@@ -32,15 +32,16 @@ if(!file.exists(datasetDirPath)) {
 
 ####Load and manage features and activity data files.
 
-## load features label data. 
+## Load features label data. 
 featuresFilePath <- file.path(datasetDirPath, "features.txt")
-featuresNamesFile <- read.table(featuresFilePath)
-names(featuresNamesFile) <- c('feature id', 'feature name')
+featuresNames <- read.table(featuresFilePath)
+names(featuresNames) <- c('featureid', 'featurename')
 
-## load activity labels data.
+## Use descriptive activity names to name the activities in the data set.
+## Load activity labels data.
 activityLabelsFilePath <- file.path(datasetDirPath, "activity_labels.txt")
-activityFile <- read.table(activityLabelsFilePath)
-names(activityFile) <- c('activity id', 'activity name')
+activityLabels <- read.table(activityLabelsFilePath)
+names(activityLabels) <- c('activityid', 'activityname')
 
 
 #### Function loads user-defined raw set. Either 'test' or 'train' data set.
@@ -54,31 +55,29 @@ dataSetLoader <- function(set) {
   ## Read in data from path variables.
   outputData <- read.table(outputPath)
   activityData <- read.table(activityPath)
-  subjectPath <- read.table(subjectPath)
+  subjectData <- read.table(subjectPath)
   
+  ## Appropriately labels the data set with descriptive activity names.
+  ## Use factor() to map activity ids to labels
+  outputData <- cbind(outputData,factor(activityData[[1]],levels=activityLabels$activityid,labels=activityLabels$activityname))
+
+  ## Add subject ids to outputData data frame
+  outputData <-cbind(outputData,factor(subjectData[[1]]))
   
+  names(outputData) <- c(as.character(featuresNames$featurename),"activity", "subject")
   
-  
+  return(outputData)
 }
 
-print(dataSetLoader('test'))
+testData <- dataSetLoader('test')
+trainData <- dataSetLoader('train')
 
-#### Proceed to assignment requirements.
 
-## Merges the training and the test sets to create one data set.
-
+## Merge the training and the test sets to create one data set.
+mergedData <- rbind(trainData, testData)
 
 ## Extracts only the measurements on the mean and standard deviation for each measurement.
 
-
-## Use descriptive activity names to name the activities in the data set.
-## Load activity labels data.
-activityLabelsFilePath <- file.path(datasetDirPath, "activity_labels.txt")
-activityFile <- read.table(activityLabelsFilePath)
-names(activityFile) <- c('activity id', 'activity name')
-
-## Appropriately labels the data set with descriptive activity names.
-activityData <- cbind(activityData,activityFile)
 
 ## Creates a second, independent tidy data set with the average of each variable for each activity and each subject.
 
