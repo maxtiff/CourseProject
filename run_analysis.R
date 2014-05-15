@@ -56,10 +56,10 @@ dataReader <- function(set) {
   ## Appropriately labels the data set with descriptive activity names.
   outputData <- cbind(outputData,factor(activityData[[1]],levels=activityLabels$id,labels=activityLabels$activity))
 
-  ## Add subject ids to outputData data frame
+  ## Add subject ids to outputData data frame.
   outputData <-cbind(outputData,factor(subjectData[[1]]))
   
-  ## Add header information to data set
+  ## Add header information to data set.
   names(outputData) <- c(as.character(featuresNames$feature),"activity", "subject")
   
   ## Extracts only the measurements on the mean and standard deviation for each measurement.
@@ -77,10 +77,11 @@ trainData <- dataReader("train")
 ## Merge the training and the test sets to create one data set.
 mergedData <- rbind(trainData, testData)
 
-## Melt data to long $ tall form
+## Melt data to long & tall form.
 meltedData <- melt(mergedData,id=c("subject","activity"))
 
 ## Create a second, independent tidy data set with the average of each variable for each activity and each subject.
 tidyData <- dcast(meltedData,subject+activity~variable,mean)
 
+## Save tidy data table to file.
 write.table(tidyData,"tidy_data.txt")
