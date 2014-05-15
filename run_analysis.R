@@ -1,4 +1,4 @@
-## Source data.table library to efficiently process large data sets and reshape2 library to melt merged data set.
+## Source data.table library to efficiently process large data sets and reshape2 library to melt and dcast merged data set.
 library(data.table)
 library(reshape2)
 
