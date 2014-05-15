@@ -1,3 +1,4 @@
 data/
 test_tidy_mean.txt
 .Rhistory
+.Rdata
