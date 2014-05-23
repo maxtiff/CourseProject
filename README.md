@@ -19,3 +19,4 @@ Here are the data for the project:
 *  Appropriately labels the data set with descriptive activity names. 
 *  Creates a second, independent tidy data set with the average of each variable for each activity and each subject. 
 
+#### *For more detailed explanation of the data, variables, and scripting process, please see the codebook.*
