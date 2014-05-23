@@ -94,7 +94,7 @@ meltedData <- melt(mergedData,id=c("subject","activity"))
 tidyData <- dcast(meltedData,subject+activity~variable,mean)
 ```
 
-9. Finally, the second tidy data set is saved as a "tidy_data.txt" in the main directory.
+Finally, the second tidy data set is saved as a "tidy_data.txt" in the main directory.
 ```{r}
 write.table(tidyData,"tidy_data.txt")
 ```
